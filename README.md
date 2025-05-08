@@ -1,47 +1,88 @@
 # thumbgen
 
-thumbgen is a lightweight Python tool for **quickly bulk-generating images/thumbnails from a PowerPoint slide**.
+**thumbgen** is a lightweight Python tool to **bulk-generate image thumbnails from a PowerPoint template**.
 
-## Example
+## ✅ Quick Example
 
-Suppose you have a text file `video_links.txt` containing the following:
+Input file: `video_links.txt`  
+Template: `template.pptx` with a text box labeled `"Change here"`
 
-```txt
+```
 Video Title 1
 Video Title 2
 Video Title 3
 ```
 
-And a PowerPoint template `template.pptx` where you want to replace the text box labeled "Change here" with each of these video titles.
-
-Run the command:
+### To generate thumbnails:
 
 ```bash
-thumbgen --input_file video_links.txt --template_path template.pptx --output_dir ./thumbnails --text_box_name "Change here"
+./run_thumbgen.sh
 ```
 
-This will generate thumbnails in the `./thumbnails` directory, with each video title replacing the specified text box in the PowerPoint slide.
-
-## Installation
-
-First, clone the repository and navigate to the project directory. Install the required dependencies by running:
+Or run manually:
 
 ```bash
+thumbgen \
+  --input_file video_links.txt \
+  --template_path template.pptx \
+  --output_dir thumbnails \
+  --text_box_name "Change here"
+```
+
+---
+
+## ⚙️ Setup
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
+pip install -e .
+brew install --cask libreoffice
 ```
 
-## Usage
+> Add LibreOffice to PATH (if needed):  
+> `export PATH="/Applications/LibreOffice.app/Contents/MacOS:$PATH"`
 
-To generate thumbnails from a PowerPoint template, use the following command:
+---
+
+## 🖌 Optional CLI Flags
 
 ```bash
-thumbgen --input_file video_links.txt --template_path template.pptx --output_dir ./thumbnails --text_box_name "Change here"
+--text_color     black | white (default: white)
+--font_size      Integer (default: 16)
 ```
 
-### Arguments:
-- `--input_file`: Path to the input file containing video names (one per line).
-- `--template_path`: Path to the PowerPoint `.pptx` template file.
-- `--output_dir`: Directory where the generated thumbnails will be saved.
-- `--text_box_name`: The name or text in the text box to be replaced in the PowerPoint template.
+Example:
+
+```bash
+thumbgen ... --text_color black --font_size 24
+```
+
+---
+
+## 📄 Script: `run_thumbgen.sh`
+
+```bash
+#!/bin/bash
+source venv/bin/activate
+export PATH="/Applications/LibreOffice.app/Contents/MacOS:$PATH"
+pip install -e .
+thumbgen \
+  --input_file video_links.txt \
+  --template_path template.pptx \
+  --output_dir thumbnails \
+  --text_box_name "Change here"
+```
+
+Make it executable:
+
+```bash
+chmod +x run_thumbgen.sh
+```
+
+---
+
+## 🪪 License
 
 MIT License
