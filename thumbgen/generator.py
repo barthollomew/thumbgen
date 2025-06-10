@@ -1,5 +1,9 @@
 import os
 from thumbgen.pptx_util import create_thumbnail_from_template
+from rich.console import Console
+
+# initialize Rich console for styled output
+console = Console()
 
 
 def process_video_thumbnails(
@@ -10,12 +14,18 @@ def process_video_thumbnails(
     text_color="white",
     font_size=16,
 ):
+    """
+    Read video names from input_file, generate thumbnails, and
+    display styled console output using Rich.
+    """
+    # load and clean video names
     with open(input_file, "r") as f:
-        lines = f.readlines()
+        video_names = [line.strip() for line in f if line.strip()]
 
-    for line in lines:
-        video_name = line.strip()
-        print(f"Generating thumbnail for: {video_name}")
+    for video_name in video_names:
+        console.print(
+            f"[bold yellow]Generating thumbnail for:[/] [cyan]{video_name}[/]"
+        )
 
         thumbnail_path = create_thumbnail_from_template(
             template_path,
@@ -25,7 +35,12 @@ def process_video_thumbnails(
             text_color,
             font_size,
         )
+
         if thumbnail_path:
-            print(f"Thumbnail for '{video_name}' saved to: {thumbnail_path}")
+            console.print(
+                f"[bold green]✔ Thumbnail saved:[/] [underline]{thumbnail_path}[/]"
+            )
         else:
-            print(f"Failed to create thumbnail for '{video_name}'.")
+            console.print(
+                f"[bold red]✖ Failed to create thumbnail for:[/] [cyan]{video_name}[/]"
+            )

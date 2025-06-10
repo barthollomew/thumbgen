@@ -1,2 +1,4 @@
 python-pptx
 pdf2image
+pillow
+rich

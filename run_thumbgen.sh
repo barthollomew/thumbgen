@@ -14,4 +14,6 @@ thumbgen \
   --input_file video_links.txt \
   --template_path template.pptx \
   --output_dir thumbnails \
-  --text_box_name "Change here"
+  --text_box_name "Change here" \
+  --text_color black \
+  --font_size 24

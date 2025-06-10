@@ -1,3 +1,1 @@
-Introduction to Practical Cybersecurity for Business
-Introduction to Ethical Hacking
-Network Basics
+Week 5: Metasploit

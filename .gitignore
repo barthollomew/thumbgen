@@ -37,3 +37,6 @@ thumbnails/
 # VSCode & PyCharm
 .vscode/
 .idea/
+
+.key/
+.pptx/
